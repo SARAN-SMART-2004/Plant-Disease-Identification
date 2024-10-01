@@ -1,0 +1,1 @@
+let res = document.getElementById("resluts")''

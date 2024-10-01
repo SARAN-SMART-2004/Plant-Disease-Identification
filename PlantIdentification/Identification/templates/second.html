@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection</title>
+    <style>
+        /* Reset and Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f0a500;
+        }
+
+        /* Homepage Content */
+        .home-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 70px);
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .home-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .home-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .home-content .btn {
+            padding: 10px 20px;
+            background: #f0a500;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .home-content .btn:hover {
+            background: #d18e00;
+        }
+
+        /* About Section */
+        .about {
+            padding: 50px 30px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .about h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Detection Page */
+        .detection-page {
+            display: none;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            min-height: 100vh;
+        }
+
+        .detection-page h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .camera-container, .upload-container, .result-container {
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        video, img {
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+        }
+
+        .controls {
+            margin-top: 15px;
+        }
+
+        .controls button, .controls input[type="file"] {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .controls button {
+            background: #f0a500;
+            color: #000;
+            transition: background 0.3s;
+        }
+
+        .controls button:hover {
+            background: #d18e00;
+        }
+
+        .controls input[type="file"] {
+            background: #fff;
+            color: #000;
+        }
+
+        .result-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .result-container h3 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .result-container p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .audio-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #00a8ff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .audio-btn:hover {
+            background: #008ae6;
+        }
+
+        /* Login and Sign Up Forms */
+        .auth-form {
+            display: none;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-form form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: left;
+        }
+
+        .auth-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 10px;
+            background: #f0a500;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .auth-form button:hover {
+            background: #d18e00;
+        }
+
+        .auth-form .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .auth-form .toggle-link a {
+            color: #f0a500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .home-content h1 {
+                font-size: 32px;
+            }
+
+            .home-content p {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 200px;
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            nav .menu-toggle {
+                display: block;
+                cursor: pointer;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">PlantDetect</div>
+        <ul id="nav-links">
+            <li><a href="#" id="home-link">Home</a></li>
+            <li><a href="#" id="about-link">About</a></li>
+            <li><a href="#" id="login-link">Login</a></li>
+            <li><a href="#" id="signup-link">Sign Up</a></li>
+        </ul>
+        <div class="menu-toggle" id="menu-toggle" style="display: none;">☰</div>
+    </nav>
+
+    <!-- Homepage Content -->
+    <div class="home-content" id="home-page">
+        <h1> CROP HEALTH MONITORING </h1>
+        <p>Detect plant diseases in real-time using your camera or by uploading an image. Get instant solutions to keep your plants healthy and thriving.</p>
+        <button class="btn" id="start-detection">Start Detection</button>
+    </div>
+
+    <!-- About Section -->
+    <div class="about" id="about-page" >
+        <h2>About PlantDetect</h2>
+        <p>PlantDetect is a cutting-edge application designed to help farmers, gardeners, and plant enthusiasts identify plant diseases quickly and accurately. By leveraging the power of real-time image capture and advanced disease recognition algorithms, PlantDetect provides instant solutions to ensure your plants remain healthy and productive.</p>
+    </div>
+
+    <!-- Detection Page -->
+    <div class="detection-page" id="detection-page">
+        <h2>Plant Disease Detection</h2>
+
+        <!-- Camera Capture Section -->
+        <div class="camera-container">
+            <h3>Capture Image Using Camera</h3>
+            <video id="video" autoplay></video>
+            <div class="controls">
+                <button id="capture-btn">Capture Image</button>
+            </div>
+        </div>
+
+        <!-- Upload Image Section -->
+        <div class="upload-container">
+            <h3>Or Upload an Image</h3>
+            <input type="file" id="upload-input" accept="image/*">
+        </div>
+
+        <!-- Canvas for Captured Image (Hidden) -->
+        <canvas id="canvas" style="display:none;"></canvas>
+
+        <!-- Display Captured or Uploaded Image -->
+        <div class="result-container" id="result-container" style="display:none;">
+            <h3>Detected Disease:</h3>
+            <p id="disease-name">Loading...</p>
+            <h3>Solution:</h3>
+            <p id="solution-text">Loading...</p>
+            <button class="audio-btn" id="play-audio">Play Solution</button>
+        </div>
+    </div>
+
+    <!-- Authentication Forms -->
+    <div class="auth-form" id="login-form">
+        <form>
+            <h2>Login</h2>
+            <label for="login-email">Email:</label>
+            <input type="email" id="login-email" required>
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" required>
+            <button type="submit">Login</button>
+            <div class="toggle-link">
+                Don't have an account? <a id="to-signup">Sign Up</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="auth-form" id="signup-form">
+        <form>
+            <h2>Sign Up</h2>
+            <label for="signup-email">Email:</label>
+            <input type="email" id="signup-email" required>
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password" required>
+            <button type="submit">Sign Up</button>
+            <div class="toggle-link">
+                Already have an account? <a id="to-login">Login</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Navigation Links
+        const homeLink = document.getElementById('home-link');
+        const aboutLink = document.getElementById('about-link');
+        const loginLink = document.getElementById('login-link');
+        const signupLink = document.getElementById('signup-link');
+        const startDetectionBtn = document.getElementById('start-detection');
+
+        // Pages
+        const homePage = document.getElementById('home-page');
+        const aboutPage = document.getElementById('about-page');
+        const detectionPage = document.getElementById('detection-page');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+
+        // Authentication Toggle Links
+        const toSignup = document.getElementById('to-signup');
+        const toLogin = document.getElementById('to-login');
+
+        // Event Listeners for Navigation
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('home');
+        });
+
+        aboutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('about');
+        });
+
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('login');
+        });
+
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('signup');
+        });
+
+        startDetectionBtn.addEventListener('click', () => {
+            showPage('detection');
+        });
+
+        // Authentication Toggle
+        toSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('signup');
+        });
+
+        toLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('login');
+        });
+
+        // Function to Show/Hide Pages
+        function showPage(page) {
+            // Hide all pages
+            homePage.style.display = 'none';
+            aboutPage.style.display = 'none';
+            detectionPage.style.display = 'none';
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'none';
+
+            // Show the selected page
+            if (page === 'home') {
+                homePage.style.display = 'flex';
+            } else if (page === 'about') {
+                aboutPage.style.display = 'block';
+            } else if (page === 'detection') {
+                detectionPage.style.display = 'block';
+            } else if (page === 'login') {
+                loginForm.style.display = 'flex';
+            } else if (page === 'signup') {
+                signupForm.style.display = 'flex';
+            }
+        }
+
+        // Camera Elements
+        const video = document.getElementById('video');
+        const captureBtn = document.getElementById('capture-btn');
+        const canvas = document.getElementById('canvas');
+        const uploadInput = document.getElementById('upload-input');
+        const resultContainer = document.getElementById('result-container');
+        const diseaseName = document.getElementById('disease-name');
+        const solutionText = document.getElementById('solution-text');
+        const playAudioBtn = document.getElementById('play-audio');
+
+        // Initialize Camera
+        function initCamera() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then((stream) => {
+                        video.srcObject = stream;
+                        video.play();
+                    })
+                    .catch((err) => {
+                        console.error("Error accessing the camera: ", err);
+                        alert("Unable to access the camera. Please allow camera access or use the upload feature.");
+                    });
+            } else {
+                alert("getUserMedia not supported in this browser.");
+            }
+        }
+
+        // Capture Image from Camera
+        captureBtn.addEventListener('click', () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageDataURL = canvas.toDataURL('image/png');
+            processImage(imageDataURL);
+        });
+
+        // Upload Image
+        uploadInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imageDataURL = event.target.result;
+                    processImage(imageDataURL);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+
+        // Process Image (Mock Function)
+        function processImage(imageDataURL) {
+            // Display the image (optional)
+            // You can create an <img> element to show the uploaded/captured image
+
+            // Mock Disease Identification
+            // In a real application, you would send the imageDataURL to the backend for processing
+            // Here, we'll simulate the detection with a timeout
+
+            diseaseName.textContent = "Detecting...";
+            solutionText.textContent = "Please wait while we identify the disease.";
+            resultContainer.style.display = 'block';
+
+            setTimeout(() => {
+                // Mock results
+                const diseases = [
+                    {
+                        name: "Powdery Mildew",
+                        solution: "Apply fungicides and ensure proper air circulation around the plants."
+                    },
+                    {
+                        name: "Leaf Spot",
+                        solution: "Remove affected leaves and apply appropriate fungicides."
+                    },
+                    {
+                        name: "Root Rot",
+                        solution: "Improve soil drainage and reduce watering frequency."
+                    }
+                ];
+
+                const detectedDisease = diseases[Math.floor(Math.random() * diseases.length)];
+                diseaseName.textContent = detectedDisease.name;
+                solutionText.textContent = detectedDisease.solution;
+            }, 2000);
+        }
+
+        // Text-to-Speech for Solution
+        playAudioBtn.addEventListener('click', () => {
+            const text = solutionText.textContent;
+            if (text && text !== "Loading...") {
+                const utterance = new SpeechSynthesisUtterance(text);
+                speechSynthesis.speak(utterance);
+            }
+        });
+
+        // Initialize the camera when the detection page is shown
+        const observer = new MutationObserver(() => {
+            if (detectionPage.style.display === 'block') {
+                initCamera();
+            }
+        });
+
+        observer.observe(detectionPage, { attributes: true, childList: true, subtree: true });
+
+        // Responsive Navigation Toggle (Optional)
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Show Home Page on Load
+        showPage('home');
+    </script>
+</body>
+</html>
+
+

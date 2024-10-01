@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantIdentification</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/f144e521ca.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/dynamsoft-camera-enhancer@2.1.0/dist/dce.js"></script>
+    <script src="{% static 'js/run.js'%}"></script>
+
+<style>
+  #open-camera{
+    color:white;
+  }
+</style>
+</head>
+
+<body>
+  {% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+  <!--navbar-->
+    <header>
+        <h2 class="logo">Plant Uses</h2>
+    <nav class="navigation">
+        <a href="/" class="active" >Home</a>
+        <a href="#discription">About-Us</a>
+    
+        <a href="/profile">Profile</a>
+        <div id="google_translate_element"></div>
+
+
+    </nav>
+    </header>
+    <!--top_header-->
+    <section class="parallax">
+        <img src="{%static 'images/hill1.png'%}" id="hill1">
+        <img src="{%static 'images/hill2.png'%}" id="hill2">
+        <img src="{%static 'images/hill3.png'%}" id="hill3">
+        <img src="{%static 'images/hill4.png'%}" id="hill4">
+        <img src="{%static 'images/hill5.png'%}" id="hill5">
+        <img src="{%static 'images/tree.png'%}" id="tree">
+        <h2 id="text">Plant-Identification</h2>
+        <a href="#image">
+        <div id="camera">
+        <li class="icon facebook">
+            <span class="tooltip">Open Camera</span>
+            <span class="icc"><i class="fa-solid fa-camera"></i></span>
+          </li>
+          </div>
+          </a>
+        <img src="{%static 'images/leaf.png'%}" id="leaf">
+        <img src="{%static 'images/plant.png'%}" id="plant">
+        </section>
+        
+    <section class="sec" id="discription">
+      <!--discription-->
+      <div class="reveal">
+        <div class="discription">
+            <div class="content">
+            <h2>Discription</h2>
+            <p>Image processing and machine learning algorithms have the potential to revolutionize the identification of medicinal plants and raw materials.
+              These technologies can provide accurate and efficient identification, reducing the time and effort required for manual identification methods.
+              By automating the identification process, these technologies can help ensure the quality and safety of medicinal products and raw materials.
+              These technologies offer a more efficient and accurate approach compared to traditional methods. The use of image processing and machine learning can help in the development of new drugs and medicines.</p>
+            </div>   
+            <div class="main"><div class="scene"><div class="plant"><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div><div class="img"><div class="img__content"><img src="{%static 'images/plant-transparent.png'%}"></div></div></div><div class="shadow"></div></div></div>    
+        </div>
+      </div>
+        <hr class="separator separator--line">
+        <hr class="separator separator--dots">
+        <!--tutorial video-->
+        <div class="reveal fade-zoom">
+        <div class="video" id="video">
+            <h1>How to scan your input plant?</h1>
+            <iframe id="yt" src="https://www.youtube.com/embed/J_UTQmDTLAE?si=j0uC3vke-82GDT3j">
+              
+            </iframe>
+        </div>
+        </div>
+
+        <hr class="separator separator--line" />
+        <hr class="separator separator--dots" />
+
+        <!--upload a image-->
+        <div class="reveal fade-right">
+          <div class="image" id="image">
+            <h1>Upload Your Image To Identify</h1>
+            <div class="btn">
+              <div id="enhancerUIContainer">
+                <img id="framepic" src="{% static 'images/cover.jpg' %}">
+              </div>
+        
+              <!-- Open Camera Button -->
+              <button>
+              <a href="{% url 'capture_image' %}" id="open-camera">Open Camera</a>
+              </button>
+        
+              <!-- Capture Form -->
+              <form id="capture-form" action="{% url 'save_image' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                
+              
+        
+              <!-- Upload Image Button -->
+              <button onclick="opens()" id="upload-img">Upload Image</button>
+        
+              <!-- Drag and Drop Upload Zone -->
+              
+            </div>
+          </div>
+        </div>
+        <hr class="separator separator--line" />
+        <hr class="separator separator--dots" />
+    </section>
+  </form>
+    
+  <!--footer-->
+  <footer>
+      <div class="footer">
+          <div class="row">
+              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-youtube"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+          </div>
+          <div class="row">
+              <ul>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#discription">About-Us</a></li>
+                  <li><a href="#video">How to analyse our input?</a></li>
+                  <li><a href="#image">Analyse your input</a></li>
+                  <li><a href="#">Profile</a></li>
+              </ul>
+          </div>
+          <div class="row">© 2024 Plant Identification | All Rights Reserved</div>
+      </div>
+  </footer>
+  
+    <script src="../static/js/script.js"></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script type="text/javascript">
+      let lang = document.getElementsByClassName('.VIpgJd-ZVi9od-ORHb');
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en'}, 
+            'google_translate_element');
+            
+      }
+  </script> 
+  
+
+
+<!-- 
+
+  <script>
+    $.ajax({
+  type: "POST",
+  url: "/",
+  data: { param: text}
+}).done(function( o ) {
+  const lan=getElementsByID(google_translate_element)
+   return google_translate_element
+}); 
+
+  </script>
+  -->
+
+
+
+</body>
+
+</html>

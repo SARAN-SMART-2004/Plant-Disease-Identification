@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "dynamsoft-camera-enhancer": "^4.0.0"
+  }
+}

@@ -1,0 +1,129 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="../static/css/result.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/f144e521ca.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <form action="/">
+  <button type="submit">Back to Home</button>
+
+  </form>
+  <div class="laptop">
+  <div class="wrap animate pop">
+		<div class="overlay">
+			<div class="overlay-content animate slide-left delay-2">
+				<h1 class="animate slide-left pop delay-4">{{resu}}</h1>
+				<p class="animate slide-left pop delay-5" style="color: white; margin-bottom: 2.5rem;">Hover to see the result</p>
+			</div>
+			<div class="image-content animate slide delay-5"></div>
+					<div class="dots animate">
+						<div class="dot animate slide-up delay-6"></div>
+						<div class="dot animate slide-up delay-7"></div>
+						<div class="dot animate slide-up delay-8"></div>
+					</div>
+		</div>
+			<div class="text">
+				<img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="{{ filename}}">
+         <table style="width:80%">
+          <tr>
+            <td>Name</td>
+            <td>{{resu}}</td>
+          </tr>
+          <tr>
+            <td>Family Name</td>
+            <td>{{ data['Family Name'] }}</td>
+          </tr>
+           <tr>
+            <td>Accuracy</td>
+            <td>{{Accuracy}}</td>
+          </tr>
+          <tr>
+            <td>Botanical name</td>
+            <td>{{ data['Botanical name'] }}</td>
+          </tr>
+          <tr>
+            <td>Uses</td>
+            <td>{{ data[ 'uses'] }}</td>
+          </tr>
+          <tr>
+            <td>Common Name</td>
+            <td>{{ data[ 'Common Name'] }}</td>
+          </tr>
+          <!-- <tr>
+            <td>Locality</td>
+            <td>Francisco Chang</td>
+          </tr> -->
+          <tr>
+            <td>Toxicity</td>
+            <td>{{ data['Toxicity'] }}</td>
+          </tr>
+          <tr>
+            <td>Audio</td>
+            <td><p>Variable 1: {{ variable1 }}</p></td>
+          </tr>
+</table>
+			</div>
+	</div>
+  </div>
+    <div class="mobile">
+      <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="{{ filename}}">
+      <table style="width:100%">
+        <tr>
+          <td>Name</td>
+          <td>{{resu}}</td>
+        </tr>
+        <tr>
+          <td>Family Name</td>
+          <td>{{ data['Family Name'] }}</td>
+        </tr>
+        <tr>
+          <td>Accuracy</td>
+          <td>{{Accuracy}}</td>
+        </tr>
+        <tr>
+          <td>Botanical name</td>
+          <td>{{ data['Botanical name'] }}</td>
+        </tr>
+        <tr>
+          <td>Uses</td>
+          <td>{{ data[ 'uses'] }}</td>
+        </tr>
+        <tr>
+          <td>Common Name</td>
+          <td>{{ data[ 'Common Name'] }}</td>
+        </tr>
+        <!-- <tr>
+          <td>Locality</td>
+          <td>Francisco Chang</td>
+        </tr> -->
+        <tr>
+          <td>Toxicity</td>
+          <td>{{ data['Toxicity'] }}</td>
+        </tr>
+        <tr>
+          <td>Audio</td>
+          <td><p>{{ variable1 }}</p></td>
+        </tr>
+    </table>
+
+  </div>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script type="text/javascript">
+    let lang = document.getElementsByClassName('.VIpgJd-ZVi9od-ORHb');
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en'}, 
+          'google_translate_element');
+          
+    }
+</script>
+<div id="google_translate_element"></div>
+
+</body>
+</html>

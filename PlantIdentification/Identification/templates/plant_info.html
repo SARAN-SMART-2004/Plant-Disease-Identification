@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Information</title>
+    <style>
+        /* Reset default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .plant-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .plant-info p {
+            font-size: 1rem;
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .plant-info p:hover {
+            background-color: #d9e2e8;
+        }
+
+        .plant-info p strong {
+            color: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #7f8c8d;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .plant-info {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Voice assistant button */
+        #voice-assistant {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        #voice-assistant:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="google_translate_element"></div>
+    <button id="voice-assistant">Read Aloud</button>
+    <div class="container">
+        <h1>Plant: {{ plantname }}</h1>
+        <div class="plant-info">
+            <p><strong>Disease Type:</strong> {{ disease_type }}</p>
+            <p><strong>How to Cure:</strong> {{ cure }}</p>
+            <p><strong>Precautionary Steps:</strong> {{ precaution }}</p>
+            <p><strong>Where it is Available:</strong> {{ available }}</p>
+            <p><strong>Seasonal Availability:</strong> {{ seasonal_availability }}</p>
+            <p><strong>Plant Benefits:</strong> {{ benifits }}</p>
+            <p><strong>Type of the Plant:</strong> {{ plant_type }}</p>
+            <p><strong>What Type of Disease it is Curable:</strong> {{ disease_cure }}</p>
+        </div>
+    </div>
+    <footer>&copy; 2024 Plant Disease Identification. All rights reserved.</footer>
+
+    <script>
+        document.getElementById('voice-assistant').addEventListener('click', () => {
+            const utterance = new SpeechSynthesisUtterance();
+            utterance.text = `
+                Plant: ${document.querySelector('h1').textContent}
+                Disease Type: ${document.querySelector('.plant-info p:nth-of-type(1)').textContent}
+                How to Cure: ${document.querySelector('.plant-info p:nth-of-type(2)').textContent}
+                Precautionary Steps: ${document.querySelector('.plant-info p:nth-of-type(3)').textContent}
+                Where it is Available: ${document.querySelector('.plant-info p:nth-of-type(4)').textContent}
+                Seasonal Availability: ${document.querySelector('.plant-info p:nth-of-type(5)').textContent}
+                Plant Benefits: ${document.querySelector('.plant-info p:nth-of-type(6)').textContent}
+                Type of the Plant: ${document.querySelector('.plant-info p:nth-of-type(7)').textContent}
+                What Type of Disease it is Curable: ${document.querySelector('.plant-info p:nth-of-type(8)').textContent}
+            `;
+            speechSynthesis.speak(utterance);
+        });
+    </script>
+    <script type="text/javascript">
+        let lang = document.getElementsByClassName('.VIpgJd-ZVi9od-ORHb');
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en'}, 
+              'google_translate_element');
+              
+        }
+    </script> 
+</body>
+</html>

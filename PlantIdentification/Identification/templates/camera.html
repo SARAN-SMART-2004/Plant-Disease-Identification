@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <style>
+        /* General reset for better appearance across browsers */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #63a2e3, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 0 auto 20px;
+            padding: 12px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: #1E90FF;
+        }
+
+        button {
+            background-color: #1E90FF;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #007BFF;
+            transform: scale(1.05);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.3s ease;
+        }
+
+        img:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="capture-form" action="{% url 'save_image' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <input type="file" name="image" accept="image/*" id="imageInput" />
+    <button type="submit" onclick="captureAndSave()">Capture and Save Image</button>
+</form>
+
+
+    <script>
+        function captureAndSave() {
+            const imageInput = document.getElementById('imageInput');
+            const file = imageInput.files[0];
+
+            if (!file) {
+                alert('Please select an image file.');
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imageDataURL = e.target.result;
+
+                // Example: You can display the captured image
+                const capturedImage = new Image();
+                capturedImage.src = imageDataURL;
+                capturedImage.alt = 'Captured Image';
+                capturedImage.style.marginTop = '20px';
+                document.body.appendChild(capturedImage);
+
+                // Save the image data to local storage or perform other actions
+                localStorage.setItem('capturedImage', imageDataURL);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>
